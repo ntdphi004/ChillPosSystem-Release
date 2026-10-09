@@ -1,0 +1,38 @@
+ChillPOS — Linux qua Docker
+===========================
+
+Linux khong co goi portable Caddy/PHP/MySQL giong Windows/macOS.
+Cach chuan: Docker Compose.
+
+1) Cai Docker Engine + Compose plugin.
+2) Lay source co Dockerfile + docker-compose.yml + .env.docker.example
+3) Cau hinh:
+
+   cp .env.docker.example .env.docker
+   # Doi MYSQL_ROOT_PASSWORD, DB_PASSWORD (va secret khac)
+
+4) Start:
+
+   docker compose up -d --build
+
+   # Tren may Windows co source day du:
+   # powershell -NoProfile -ExecutionPolicy Bypass -File scripts/docker-up.ps1 -Build
+
+5) Mo http://127.0.0.1:8088  (port mac dinh compose; xem .env.docker)
+6) Health: http://127.0.0.1:8088/health  → status=ok
+
+Dung:
+
+   docker compose down
+
+Du lieu
+-------
+- MySQL: volume db_data
+- App files: app_storage, app_uploads
+Khi chuyen may: dung scripts/docker-move-package.ps1 (neu co trong source)
+hoac docker-backup-db.ps1 + docker-backup-volumes.ps1
+
+Luu y
+-----
+- Doi mat khau DB truoc khi public.
+- Khong dung mat khau mau ChangeMe* tren production.

@@ -1,0 +1,28 @@
+ChillPOS — Checklist cai dat nhanh (khach hang)
+================================================
+
+[ ] 1. Chon dung file theo may:
+      - Windows ............. ChillPos_POS_Release.zip
+      - Mac Apple Silicon ... ChillPos_POS_Release_macOS_arm64.zip
+      - Mac Intel ........... ChillPos_POS_Release_macOS_x64.zip
+      - Linux ............... Docker (xem docs/HUONG_DAN_LINUX_DOCKER.txt)
+
+[ ] 2. Giai nen vao thu muc NGAN, KHONG dau cach
+      Vi du: C:\ChillPOS   hoac   ~/ChillPOS
+
+[ ] 3. Start
+      Windows: ChillPOS-Start.exe
+      macOS:   ChillPOS-Start.command  (neu bi chan: xattr -cr .)
+
+[ ] 4. Mo http://127.0.0.1:8999  (Docker Linux: thuong la :8088)
+
+[ ] 5. Dang nhap owner → DOI MAT KHAU ngay
+
+[ ] 6. (Tuy chon) Tablet/bep cung Wi-Fi:
+      Windows: chay allow_lan.bat → mo dung IP LAN:8999
+
+[ ] 7. (Windows + USB printer) cau hinh printer-bridge theo HUONG_DAN trong goi
+
+[ ] 8. Stop khi het ca: ChillPOS-Stop.exe / ChillPOS-Stop.command
+
+Ho tro chi tiet: README.md va thu muc docs/

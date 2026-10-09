@@ -1,0 +1,29 @@
+ChillPOS Portable — macOS
+=========================
+
+1) Chon dung zip:
+   - Apple Silicon (M1+): ChillPos_POS_Release_macOS_arm64.zip
+   - Intel:               ChillPos_POS_Release_macOS_x64.zip
+2) Giai nen vao ~/ChillPOS (khong dau cach trong duong dan).
+3) Lan dau neu Gatekeeper chan:
+
+   cd ~/ChillPOS
+   xattr -cr .
+   chmod +x ChillPOS-Start.command ChillPOS-Stop.command start.sh stop.sh
+   open ChillPOS-Start.command
+
+4) Web: http://127.0.0.1:8999
+5) Tat: ChillPOS-Stop.command
+
+Yeu cau: macOS 14+ 
+
+In an
+-----
+Khong co USB printer-bridge Windows.
+Dung network_tcp (may in LAN) hoac browser_bridge tren thiet bi cam tay.
+
+Kiem tra
+--------
+Sau khi Start: ./macos-smoke-check.sh
+
+Cong: 8999 (web) / 9990 (PHP) / 33306 (MySQL)

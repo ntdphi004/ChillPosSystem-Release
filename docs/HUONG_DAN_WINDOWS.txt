@@ -1,0 +1,33 @@
+ChillPOS Portable — Windows
+===========================
+
+1) Tai ChillPos_POS_Release.zip tu trang Releases.
+2) Giai nen vao C:\ChillPOS (tranh Desktop/Downloads neu co OneDrive).
+3) Chay ChillPOS-Start.exe.
+   - Lan dau: MySQL init + migrate demo (co the 30-90 giay).
+   - Trinh duyet mo http://127.0.0.1:8999
+4) Tat: ChillPOS-Stop.exe
+
+LAN (tablet / bep)
+------------------
+1. Chay allow_lan.bat (Admin).
+2. Ghi nhan IP in ra, vi du http://192.168.x.x:8999
+3. Tablet phai cung Wi-Fi; khong dung 127.0.0.1 tren may khac.
+4. APP_URL trong www\.env duoc cap nhat theo IP LAN.
+
+May in USB
+----------
+1. list-printers.bat — xem ten may in Windows.
+2. Doc HUONG_DAN_CAU_HINH_LOCAL_PRINTER_BRIDGE.md trong goi.
+3. start-printer-bridge.bat
+4. Trong POS/Admin chon local_bridge_http + dung port bridge da verify /health.
+
+Cong mac dinh
+-------------
+8999 = Web   |   9990 = PHP-CGI   |   33306 = MySQL
+
+Su co
+-----
+- SmartScreen: More info → Run anyway, hoac start.bat
+- Cong bi chiem: Stop roi Start; tat ban ChillPOS cu
+- Migrate loi: xem migrate.log o thu muc goi; thu Stop → xoa mysql\data (MAT DATA) → Start lai

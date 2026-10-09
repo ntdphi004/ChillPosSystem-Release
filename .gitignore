@@ -1,0 +1,11 @@
+﻿*.zip
+*.zip.tmp
+*.tar.gz
+*.tgz
+*.rar
+*.exe
+*.dmg
+.DS_Store
+Thumbs.db
+.env
+license.key
