@@ -5,7 +5,8 @@ ChillPOS — Checklist cai dat nhanh (khach hang)
       - Windows ............. ChillPos_POS_Release.zip
       - Mac Apple Silicon ... ChillPos_POS_Release_macOS_arm64.zip
       - Mac Intel ........... ChillPos_POS_Release_macOS_x64.zip
-      - Linux ............... Docker (xem docs/HUONG_DAN_LINUX_DOCKER.txt)
+      - Linux x86_64 ........ ChillPos_POS_Release_linux_x64.zip
+      - Linux ARM64 ......... ChillPos_POS_Release_linux_arm64.zip
 
 [ ] 2. Giai nen vao thu muc NGAN, KHONG dau cach
       Vi du: C:\ChillPOS   hoac   ~/ChillPOS
@@ -13,8 +14,9 @@ ChillPOS — Checklist cai dat nhanh (khach hang)
 [ ] 3. Start
       Windows: ChillPOS-Start.exe
       macOS:   ChillPOS-Start.command  (neu bi chan: xattr -cr .)
+      Linux:   chmod +x ChillPOS-Start.sh && ./ChillPOS-Start.sh
 
-[ ] 4. Mo http://127.0.0.1:8999  (Docker Linux: thuong la :8088)
+[ ] 4. Mo http://127.0.0.1:8999
 
 [ ] 5. Dang nhap owner → DOI MAT KHAU ngay
 

@@ -13,9 +13,11 @@ Tải file đóng gói tại trang **[Releases](https://github.com/ntdphi004/Chi
 | **Windows 10/11** | `ChillPos_POS_Release.zip` | Giải nén → double-click `ChillPOS-Start.exe` |
 | **macOS Apple Silicon** (M1/M2/M3/M4) | `ChillPos_POS_Release_macOS_arm64.zip` | Giải nén → mở `ChillPOS-Start.command` |
 | **macOS Intel** | `ChillPos_POS_Release_macOS_x64.zip` | Giải nén → mở `ChillPOS-Start.command` |
-| **Linux** (hoặc máy đã có Docker) | Source Docker trong repo gốc / hướng dẫn bên dưới | `docker compose up` |
+| **Linux x86_64** | `ChillPos_POS_Release_linux_x64.zip` | Giải nén → `./ChillPOS-Start.sh` |
+| **Linux ARM64** | `ChillPos_POS_Release_linux_arm64.zip` | Giải nén → `./ChillPOS-Start.sh` |
+| **Linux (Docker, tuỳ chọn)** | Source + Compose | `docker compose up` |
 
-> Linux **không** có zip Caddy/PHP/MySQL portable giống Windows/macOS. Cách chuẩn: **Docker Compose** (xem mục Linux).
+> Linux portable cũng kèm **Caddy + PHP + MySQL** (giống Windows/macOS). Docker chỉ là lựa chọn thay thế.
 
 ---
 
@@ -36,7 +38,14 @@ Tải file đóng gói tại trang **[Releases](https://github.com/ntdphi004/Chi
 - Cùng cổng 8999 / 9990 / 33306
 - Lần đầu có thể cần bỏ qua Gatekeeper (xem bên dưới)
 
-### Linux (Docker)
+### Linux portable
+
+- glibc **2.28+** (Ubuntu 20.04+, Debian 10+, RHEL 8+)
+- ~2 GB trống; đúng chip **x64** hoặc **arm64**
+- Cổng tự do: **8999** / **9990** / **33306**
+- Không cần cài PHP/MySQL/Caddy hệ thống
+
+### Linux Docker (tuỳ chọn)
 
 - Docker Engine + Compose plugin
 - ~2 GB trống cho image + volume
@@ -131,34 +140,40 @@ Chi tiết: [`docs/HUONG_DAN_MACOS.txt`](docs/HUONG_DAN_MACOS.txt)
 
 ---
 
-## Cài đặt & chạy — Linux (Docker)
+## Cài đặt & chạy — Linux (portable)
 
-1. Cài [Docker Engine](https://docs.docker.com/engine/install/) + Compose.
-2. Lấy source ChillPOS (repo phát triển) hoặc gói Docker release kèm `Dockerfile` + `docker-compose.yml`.
-3. Sao chép cấu hình:
+### 1. Tải đúng kiến trúc
 
-```bash
-cp .env.docker.example .env.docker
-# Đổi DB_PASSWORD / MYSQL_ROOT_PASSWORD ngay
-```
+| Chip | File |
+|------|------|
+| x86_64 / amd64 | `ChillPos_POS_Release_linux_x64.zip` |
+| ARM64 / aarch64 | `ChillPos_POS_Release_linux_arm64.zip` |
 
-4. Khởi động:
+Kiểm tra: `uname -m` → `x86_64` hoặc `aarch64`.
 
-```bash
-docker compose up -d --build
-# hoặc trên Windows host: powershell -File scripts/docker-up.ps1 -Build
-```
-
-5. Mở: **http://127.0.0.1:8088** (port mặc định Docker; xem `.env.docker`).
-6. Health: `http://127.0.0.1:8088/health` phải trả `status=ok`.
-
-Dừng:
+### 2. Giải nén & chạy
 
 ```bash
-docker compose down
+cd ~/ChillPOS   # đổi đúng đường dẫn giải nén (không có khoảng trắng)
+chmod +x ChillPOS-Start.sh ChillPOS-Stop.sh start.sh stop.sh allow_lan.sh
+./ChillPOS-Start.sh
 ```
 
-Chi tiết: [`docs/HUONG_DAN_LINUX_DOCKER.txt`](docs/HUONG_DAN_LINUX_DOCKER.txt)
+Web: **http://127.0.0.1:8999** — Stop: `./ChillPOS-Stop.sh`
+
+### 3. LAN (tablet / bếp)
+
+```bash
+./allow_lan.sh
+./ChillPOS-Stop.sh && ./ChillPOS-Start.sh
+# Mở http://<IP-LAN>:8999 trên thiết bị khác
+```
+
+### 4. Docker (tuỳ chọn)
+
+Xem [`docs/HUONG_DAN_LINUX_DOCKER.txt`](docs/HUONG_DAN_LINUX_DOCKER.txt) mục B.
+
+---
 
 ---
 

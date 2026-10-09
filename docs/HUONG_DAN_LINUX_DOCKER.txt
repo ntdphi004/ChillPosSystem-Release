@@ -1,22 +1,48 @@
-ChillPOS — Linux qua Docker
-===========================
+ChillPOS — Linux
+================
 
-Linux khong co goi portable Caddy/PHP/MySQL giong Windows/macOS.
-Cach chuan: Docker Compose.
+Co 2 cach chay tren Linux:
 
-1) Cai Docker Engine + Compose plugin.
+A) Portable unzip-and-run (khuyen dung cho may quay / offline)
+-------------------------------------------------------------
+1) Tai dung chip:
+   - x86_64 / amd64 ........ ChillPos_POS_Release_linux_x64.zip
+   - ARM64 / aarch64 ....... ChillPos_POS_Release_linux_arm64.zip
+2) Giai nen vao ~/ChillPOS (KHONG dau cach trong duong dan).
+3) Chay:
+
+   cd ~/ChillPOS
+   chmod +x ChillPOS-Start.sh ChillPOS-Stop.sh start.sh stop.sh allow_lan.sh
+   ./ChillPOS-Start.sh
+
+4) Mo http://127.0.0.1:8999
+5) Tat: ./ChillPOS-Stop.sh
+
+Yeu cau he thong:
+- glibc 2.28+ (Ubuntu 20.04+, Debian 10+, RHEL 8+, Fedora gan day)
+- Cong trong: 8999 (web), 9990 (PHP), 33306 (MySQL)
+
+LAN (tablet / bep):
+  ./allow_lan.sh
+  ./ChillPOS-Stop.sh && ./ChillPOS-Start.sh
+  Mo IP LAN:8999 tren thiet bi khac (khong dung 127.0.0.1)
+
+In an:
+  Khong co USB printer-bridge Windows.
+  Dung network_tcp (may in LAN) hoac browser_bridge.
+
+B) Docker Compose (server / da quen Docker)
+-------------------------------------------
+1) Cai Docker Engine + Compose.
 2) Lay source co Dockerfile + docker-compose.yml + .env.docker.example
 3) Cau hinh:
 
    cp .env.docker.example .env.docker
-   # Doi MYSQL_ROOT_PASSWORD, DB_PASSWORD (va secret khac)
+   # Doi MYSQL_ROOT_PASSWORD, DB_PASSWORD
 
 4) Start:
 
    docker compose up -d --build
-
-   # Tren may Windows co source day du:
-   # powershell -NoProfile -ExecutionPolicy Bypass -File scripts/docker-up.ps1 -Build
 
 5) Mo http://127.0.0.1:8088  (port mac dinh compose; xem .env.docker)
 6) Health: http://127.0.0.1:8088/health  → status=ok
@@ -25,14 +51,6 @@ Dung:
 
    docker compose down
 
-Du lieu
--------
-- MySQL: volume db_data
-- App files: app_storage, app_uploads
-Khi chuyen may: dung scripts/docker-move-package.ps1 (neu co trong source)
-hoac docker-backup-db.ps1 + docker-backup-volumes.ps1
-
-Luu y
------
+Luu y Docker:
 - Doi mat khau DB truoc khi public.
 - Khong dung mat khau mau ChangeMe* tren production.
